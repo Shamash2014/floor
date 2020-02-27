@@ -7,11 +7,15 @@ homepage: https://github.com/vitusortner/floor
 author: Vitus Ortner <vitusortner.dev@gmail.com>
 
 environment:
-  sdk: '>=2.6.0 <3.0.0'
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   path: ^1.6.4
-  sqflite: ^1.2.0
+  sqflite:
+    git:
+      url: https://github.com/Shamash2014/sqflite_sqlcipher.git
+      path: sqflite
+
   floor_annotation: ^0.6.0
   meta: ^1.1.8
   flutter:
