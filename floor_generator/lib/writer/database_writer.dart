@@ -90,6 +90,10 @@ class DatabaseWriter implements Writer {
       ..name = 'path'
       ..type = refer('String'));
 
+    final passwordParameter = Parameter((builder) => builder
+      ..name = 'password'
+      ..type = refer('String'));
+
     final migrationsParameter = Parameter((builder) => builder
       ..name = 'migrations'
       ..type = refer('List<Migration>'));
@@ -103,10 +107,11 @@ class DatabaseWriter implements Writer {
       ..returns = refer('Future<sqflite.Database>')
       ..modifier = MethodModifier.async
       ..requiredParameters.addAll([pathParameter, migrationsParameter])
-      ..optionalParameters.add(callbackParameter)
+      ..optionalParameters.addAll([callbackParameter, passwordParameter])
       ..body = Code('''
           return sqflite.openDatabase(
             path,
+            password: password,
             version: ${database.version},
             onConfigure: (database) async {
               await database.execute('PRAGMA foreign_keys = ON');
